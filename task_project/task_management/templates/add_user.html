@@ -1,0 +1,300 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+Add User
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+  body{
+    background:#f1f5f9;
+  }
+
+  .user-box{
+
+    max-width:900px;
+
+    margin:40px auto;
+
+    background:white;
+
+    padding:45px;
+
+    border-radius:24px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+
+  }
+
+  .user-box h2{
+
+    font-size:36px;
+
+    font-weight:700;
+
+    color:#0f172a;
+
+    margin-bottom:35px;
+
+    text-align:center;
+
+  }
+
+  .form-label{
+
+    font-weight:500;
+
+    color:#334155;
+
+    margin-bottom:8px;
+
+  }
+
+  .form-control,
+  .form-select{
+
+    width:100%;
+
+    height:54px;
+
+    border-radius:12px;
+
+    border:1px solid #cbd5e1;
+
+    padding:12px 15px;
+
+    font-size:15px;
+
+    transition:0.3s;
+
+  }
+
+  .form-control:focus,
+  .form-select:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 4px rgba(37,99,235,0.12);
+
+  }
+
+  textarea.form-control{
+
+    height:auto;
+
+    min-height:120px;
+
+    resize:none;
+
+  }
+
+  input[type="file"]{
+
+    padding:12px;
+
+  }
+
+  .btn-primary{
+
+    height:55px;
+
+    border:none;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    background:#2563eb;
+
+    transition:0.3s;
+
+  }
+
+  .btn-primary:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+  }
+
+</style>
+
+<div class="container">
+
+  <div class="user-box">
+
+    <h2>
+      Add New User
+    </h2>
+
+    <form method="POST" enctype="multipart/form-data">
+
+      {% csrf_token %}
+
+      <!-- Profile Image -->
+
+      <div class="mb-4">
+
+        <label class="form-label">
+          Profile Image
+        </label>
+
+        <input
+          type="file"
+          class="form-control"
+          name="profile_image"
+          accept="image/*"
+        >
+
+      </div>
+
+      <!-- Full Name + Email -->
+
+      <div class="row">
+
+        <div class="col-md-6 mb-4">
+
+          <label class="form-label">
+            Full Name
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="full_name"
+            placeholder="Enter full name"
+            required
+          >
+
+        </div>
+
+        <div class="col-md-6 mb-4">
+
+          <label class="form-label">
+            Email Address
+          </label>
+
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            placeholder="Enter email"
+            required
+          >
+
+        </div>
+
+      </div>
+
+      <!-- Password + Phone -->
+
+      <div class="row">
+
+        <div class="col-md-6 mb-4">
+
+          <label class="form-label">
+            Password
+          </label>
+
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            placeholder="Enter password"
+            required
+          >
+
+        </div>
+
+        <div class="col-md-6 mb-4">
+
+          <label class="form-label">
+            Phone Number
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="phone"
+            placeholder="Enter phone number"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- Role -->
+
+      <div class="row">
+
+        <div class="col-md-6 mb-4">
+
+          <label class="form-label">
+            Role
+          </label>
+
+          <select
+            class="form-select"
+            name="role"
+            required
+          >
+
+            <option value="">
+              Select Role
+            </option>
+
+            <option value="admin">
+              Admin
+            </option>
+
+            <option value="developer">
+              Developer
+            </option>
+
+            <option value="tester">
+              Tester
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+      <!-- Address -->
+
+      <div class="mb-4">
+
+        <label class="form-label">
+          Address
+        </label>
+
+        <textarea
+          class="form-control"
+          name="address"
+          rows="5"
+          placeholder="Enter address"
+        ></textarea>
+
+      </div>
+
+      <!-- Button -->
+
+      <button class="btn btn-primary w-100">
+
+        Add User
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+{% endblock %}

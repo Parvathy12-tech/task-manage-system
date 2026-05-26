@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TaskFlow | Task Management System</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#f8fafc;
+      color:#0f172a;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      width:100%;
+      padding:22px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      position:fixed;
+      top:0;
+      left:0;
+      z-index:1000;
+
+      background:rgba(255,255,255,0.8);
+        backdrop-filter:blur(10px);
+
+      border-bottom:1px solid rgba(0,0,0,0.05);
+    }
+
+    .logo{
+      font-size:30px;
+      font-weight:700;
+      color:#0f172a;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:35px;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:#475569;
+      font-size:15px;
+      font-weight:500;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:#2563eb;
+    }
+
+    .login-btn{
+      background:#2563eb;
+      color:white !important;
+      padding:12px 24px;
+      border-radius:12px;
+    }
+
+    .login-btn:hover{
+      background:#1d4ed8;
+    }
+
+    /* HERO SECTION */
+
+    .hero{
+      min-height:100vh;
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+
+      padding:140px 8% 80px;
+
+      background:
+      linear-gradient(rgba(255,255,255,0.82), rgba(255,255,255,0.82)),
+      url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1600&auto=format&fit=crop");
+
+      background-size:cover;
+      background-position:center;
+    }
+
+    .hero-content{
+      max-width:850px;
+    }
+
+    .hero-content h1{
+      font-size:70px;
+      line-height:1.1;
+      margin-bottom:25px;
+      color:#0f172a;
+    }
+
+    .hero-content h1 span{
+      color:#2563eb;
+    }
+
+    .hero-content p{
+      font-size:18px;
+      color:#475569;
+      line-height:1.8;
+      margin-bottom:40px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn-primary{
+      background:#2563eb;
+      color:white;
+      text-decoration:none;
+      padding:16px 34px;
+      border-radius:14px;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .btn-primary:hover{
+      background:#1d4ed8;
+      transform:translateY(-3px);
+    }
+
+    .btn-secondary{
+      background:white;
+      color:#0f172a;
+      text-decoration:none;
+      padding:16px 34px;
+      border-radius:14px;
+      font-weight:600;
+      border:1px solid #cbd5e1;
+      transition:0.3s;
+    }
+
+    .btn-secondary:hover{
+      background:#f1f5f9;
+    }
+
+    /* FEATURES */
+
+    .features{
+      padding:100px 8%;
+      background:white;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:60px;
+    }
+
+    .section-title h2{
+      font-size:42px;
+      margin-bottom:15px;
+      color:#0f172a;
+    }
+
+    .section-title p{
+      color:#64748b;
+      font-size:17px;
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .feature-card{
+      background:#f8fafc;
+      padding:35px;
+      border-radius:24px;
+      border:1px solid #e2e8f0;
+      transition:0.3s;
+    }
+
+    .feature-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    .feature-icon{
+      font-size:50px;
+      margin-bottom:20px;
+    }
+
+    .feature-card h3{
+      margin-bottom:15px;
+      font-size:24px;
+      color:#0f172a;
+    }
+
+    .feature-card p{
+      color:#64748b;
+      line-height:1.8;
+      font-size:15px;
+    }
+
+    /* FOOTER */
+
+    footer{
+      background:#0f172a;
+      color:white;
+      text-align:center;
+      padding:30px;
+    }
+
+    footer p{
+      color:#cbd5e1;
+      font-size:14px;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:900px){
+
+      .hero-content h1{
+        font-size:52px;
+      }
+
+    }
+
+    @media(max-width:700px){
+
+      nav{
+        padding:20px 5%;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      .hero{
+        padding:130px 5% 70px;
+      }
+
+      .hero-content h1{
+        font-size:40px;
+      }
+
+      .hero-content p{
+        font-size:16px;
+      }
+
+      .section-title h2{
+        font-size:32px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav>
+
+    <div class="logo">
+      TaskFlow
+    </div>
+
+    <div class="nav-links">
+
+      <a href="#">Home</a>
+      <a href="#">Features</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+
+      <a href="/admin-login/" class="login-btn">
+        Admin Login
+      </a>
+
+    </div>
+
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h1>
+        Smart Task <span>Management</span><br>
+        For Modern Teams
+      </h1>
+
+      <p>
+        Organize tasks, manage team members, track project progress
+        and improve productivity with a modern task management platform
+        built for efficient workflow and collaboration.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="/admin-login/" class="btn-primary">
+          Get Started
+        </a>
+
+        <a href="#" class="btn-secondary">
+          Learn More
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FEATURES -->
+
+  <section class="features">
+
+    <div class="section-title">
+
+      <h2>Why Choose TaskFlow?</h2>
+
+      <p>
+        Everything you need to manage projects and teams efficiently.
+      </p>
+
+    </div>
+
+    <div class="feature-grid">
+
+      <div class="feature-card">
+
+        <div class="feature-icon">
+          📋
+        </div>
+
+        <h3>Task Management</h3>
+
+        <p>
+          Create, organize and track tasks with real-time updates
+          and workflow management.
+        </p>
+
+      </div>
+
+      <div class="feature-card">
+
+        <div class="feature-icon">
+          👥
+        </div>
+
+        <h3>Team Collaboration</h3>
+
+        <p>
+          Manage team members, assign responsibilities and improve
+          collaboration across projects.
+        </p>
+
+      </div>
+
+      <div class="feature-card">
+
+        <div class="feature-icon">
+          📈
+        </div>
+
+        <h3>Reports & Analytics</h3>
+
+        <p>
+          Monitor productivity, task completion and project performance
+          using detailed analytics.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <p>
+      © 2026 TaskFlow. All Rights Reserved.
+    </p>
+
+  </footer>
+
+</body>
+</html>

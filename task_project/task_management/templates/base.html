@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TaskFlow</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    body{
+      background:#f1f5f9;
+      display:flex;
+      min-height:100vh;
+      color:#0f172a;
+    }
+
+    /* ================= SIDEBAR ================= */
+    .sidebar{
+      width:260px;
+      background:linear-gradient(180deg,#0f172a,#111c33);
+      height:100vh;
+      position:fixed;
+      left:0;
+      top:0;
+      padding:30px 20px;
+      box-shadow:2px 0 20px rgba(0,0,0,0.15);
+    }
+
+    .logo{
+      font-size:24px;
+      font-weight:700;
+      color:#fff;
+      text-align:center;
+      margin-bottom:40px;
+      letter-spacing:1px;
+    }
+
+    .menu a{
+      display:flex;
+      align-items:center;
+      gap:12px;
+
+      color:#cbd5e1;
+      text-decoration:none;
+
+      padding:12px 16px;
+      margin-bottom:10px;
+
+      border-radius:12px;
+      font-size:14px;
+
+      transition:0.3s ease;
+    }
+
+    .menu a:hover{
+      background:#1e293b;
+      color:white;
+      transform:translateX(6px);
+    }
+
+    .menu a.active{
+      background:#2563eb;
+      color:white;
+      box-shadow:0 6px 15px rgba(37,99,235,0.3);
+    }
+
+    .logout{
+      margin-top:40px;
+    }
+
+    .logout a{
+      display:flex;
+      align-items:center;
+      gap:12px;
+
+      color:#fca5a5;
+      text-decoration:none;
+
+      padding:12px 16px;
+      border-radius:12px;
+
+      transition:0.3s;
+    }
+
+    .logout a:hover{
+      background:#7f1d1d;
+      color:white;
+    }
+
+    /* ================= MAIN CONTENT ================= */
+    .main-content{
+      margin-left:260px;
+      width:100%;
+    }
+
+    /* ================= TOPBAR ================= */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+
+      background:#0f172a;
+      color:white;
+
+      padding:18px 22px;
+      margin:20px;
+      border-radius:16px;
+
+      box-shadow:0 6px 15px rgba(0,0,0,0.08);
+    }
+
+    .topbar-box{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .topbar-box h1{
+      font-size:20px;
+      font-weight:600;
+    }
+
+    /* ADMIN PROFILE */
+    .admin-profile{
+      display:flex;
+      align-items:center;
+      gap:10px;
+
+      background:#1e293b;
+      padding:8px 14px;
+      border-radius:12px;
+    }
+
+    .admin-profile img{
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      object-fit:cover;
+    }
+
+    .admin-profile h4{
+      font-size:14px;
+      color:white;
+    }
+
+    .admin-profile p{
+      font-size:12px;
+      color:#94a3b8;
+    }
+
+    /* ================= PAGE CONTENT ================= */
+    .page-content{
+      padding:20px 30px 30px 30px;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media(max-width:900px){
+
+      .sidebar{
+        width:80px;
+        padding:20px 10px;
+      }
+
+      .logo{
+        font-size:14px;
+      }
+
+      .menu a{
+        justify-content:center;
+        font-size:12px;
+      }
+
+      .menu a span{
+        display:none;
+      }
+
+      .main-content{
+        margin-left:80px;
+      }
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- ================= SIDEBAR ================= -->
+  <div class="sidebar">
+
+    <div class="logo">
+      TaskFlow
+    </div>
+
+    <div class="menu">
+      <a href="/dashboard/" class="{% if request.path == '/dashboard/' %}active{% endif %}">
+  📊 <span>Dashboard</span>
+</a>
+
+<a href="/manage-users/" class="{% if request.path == '/manage-users/' %}active{% endif %}">
+  👥 <span>Manage Users</span>
+</a>
+<!--
+<a href="/manage-tasks/" class="{% if request.path == '/manage-tasks/' %}active{% endif %}">
+  📋 <span>Manage Tasks</span>
+</a> -->
+
+<a href="/project-management/" class="{% if request.path == '/project-management/' %}active{% endif %}">
+  📋 <span>Task Management</span>
+</a>
+
+<a href="/reports/" class="{% if request.path == '/reports/' %}active{% endif %}">
+  📈 <span>Reports</span>
+</a>
+
+
+    </div>
+
+    <div class="logout">
+      <a href="/">🚪 <span>Logout</span></a>
+    </div>
+
+  </div>
+
+  <!-- ================= MAIN ================= -->
+  <div class="main-content">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-box">
+
+        <!-- PAGE TITLE -->
+        <h1>
+          {% block page_title %}Admin Panel{% endblock %}
+        </h1>
+
+        <!-- ADMIN PROFILE -->
+        <div class="admin-profile">
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="admin">
+
+          <div>
+            <h4>Admin</h4>
+            <p>Administrator</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PAGE CONTENT -->
+    <div class="page-content">
+      {% block content %}
+      {% endblock %}
+    </div>
+
+  </div>
+
+</body>
+</html>

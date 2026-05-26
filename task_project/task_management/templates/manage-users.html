@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+Admin Panel
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+h2{
+  margin-bottom:20px;
+  color:#0f172a;
+  font-size:30px;
+  font-weight:700;
+}
+
+.top-section{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+table th{
+  background:#0f172a;
+  color:white;
+  padding:16px;
+  text-align:center;
+  font-size:14px;
+}
+
+table td{
+  padding:14px;
+  text-align:center;
+  border-bottom:1px solid #e2e8f0;
+  color:#334155;
+  vertical-align:middle;
+}
+
+table tr:hover{
+  background:#f8fafc;
+}
+
+.user-info{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.user-img{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #e2e8f0;
+}
+
+.default-avatar{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:#dbeafe;
+  color:#1d4ed8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  font-size:18px;
+}
+
+button{
+  padding:8px 14px;
+  border:none;
+  cursor:pointer;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.edit{
+  background:#16a34a;
+  color:white;
+}
+
+.edit:hover{
+  background:#15803d;
+}
+
+.delete{
+  background:#dc2626;
+  color:white;
+}
+
+.delete:hover{
+  background:#b91c1c;
+}
+
+.add-user{
+  background:#2563eb;
+  color:white;
+}
+
+.add-user:hover{
+  background:#1d4ed8;
+}
+
+a{
+  text-decoration:none;
+}
+
+.role-badge{
+  background:#dbeafe;
+  color:#1d4ed8;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:600;
+}
+
+.empty-row{
+  padding:30px;
+  color:#64748b;
+}
+
+</style>
+
+<div class="top-section">
+
+  <h2>
+    Manage Users
+  </h2>
+
+  <a href="{% url 'add_user' %}">
+
+    <button class="add-user">
+      Add User
+    </button>
+
+  </a>
+
+</div>
+
+<div class="table-responsive">
+
+  <table>
+
+    <tr>
+
+      <th>User</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Action</th>
+
+    </tr>
+
+    {% for user in users %}
+
+    <tr>
+
+      <td>
+
+        <div class="user-info">
+
+          {% if user.image %}
+
+          <img
+            src="{{ user.image }}"
+            class="user-img"
+          >
+
+          {% else %}
+
+          <div class="default-avatar">
+
+            {{ user.name|slice:":1" }}
+
+          </div>
+
+          {% endif %}
+
+          <span>
+
+            {{ user.name }}
+
+          </span>
+
+        </div>
+
+      </td>
+
+      <td>
+
+        {{ user.email }}
+
+      </td>
+
+      <td>
+
+        <span class="role-badge">
+
+          {{ user.role }}
+
+        </span>
+
+      </td>
+
+      <td>
+
+        <a href="{% url 'edit_user' user.id %}">
+
+          <button class="edit">
+            Edit
+          </button>
+
+        </a>
+
+        <a href="{% url 'delete_user' user.id %}">
+
+          <button class="delete">
+            Delete
+          </button>
+
+        </a>
+
+      </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+
+      <td colspan="4" class="empty-row">
+
+        No users found
+
+      </td>
+
+    </tr>
+
+    {% endfor %}
+
+  </table>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+
+/* ================= DASHBOARD CARDS ================= */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:25px;
+  margin-bottom:35px;
+}
+
+.card{
+  background:white;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+}
+
+.card h2{
+  font-size:34px;
+  margin-bottom:10px;
+  color:#0f172a;
+}
+
+.card p{
+  color:#64748b;
+  font-size:15px;
+}
+
+.card-1{ border-left:6px solid #2563eb; }
+.card-2{ border-left:6px solid #16a34a; }
+.card-3{ border-left:6px solid #f59e0b; }
+.card-4{ border-left:6px solid #dc2626; }
+
+/* ================= TABLE ================= */
+.table-container{
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+.table-header{
+  margin-bottom:15px;
+}
+
+.table-header h2{
+  color:#0f172a;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+table th{
+  background:#e2e8f0;
+  padding:15px;
+  text-align:left;
+  color:#0f172a;
+  font-size:14px;
+}
+
+table td{
+  padding:15px;
+  border-bottom:1px solid #e2e8f0;
+  color:#475569;
+  font-size:14px;
+}
+
+.status{
+  padding:6px 14px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:500;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:700px){
+  .cards{
+    grid-template-columns:1fr;
+  }
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  text-align: center;
+}
+</style>
+
+<!-- DASHBOARD CARDS -->
+
+<div class="cards">
+
+  <div class="card card-1">
+    <h2>{{ total_users }}</h2>
+    <p>Total Users</p>
+  </div>
+
+  <div class="card card-2">
+    <h2>{{ completed_tasks }}</h2>
+    <p>Completed Tasks</p>
+  </div>
+
+  <div class="card card-3">
+    <h2>{{ pending_tasks }}</h2>
+    <p>Pending Tasks</p>
+  </div>
+
+  <div class="card card-4">
+    <h2>{{ progress_tasks }}</h2>
+    <p>In Progress Tasks</p>
+  </div>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="table-container">
+
+  <div class="table-header">
+    <h2>Recent Tasks</h2>
+  </div>
+
+  <table>
+
+    <tr>
+      <th>Task</th>
+      <th>User</th>
+      <th>Status</th>
+      <th>Deadline</th>
+    </tr>
+
+    {% for task in recent_tasks %}
+    <tr>
+      <td>{{ task.title }}</td>
+
+      <td>
+        {% if task.assigned_to %}
+          {{ task.assigned_to.first_name }} {{ task.assigned_to.last_name }}
+        {% else %}
+          Not Assigned
+        {% endif %}
+      </td>
+
+      <td>
+        <span class="status">{{ task.status }}</span>
+      </td>
+
+      <td>
+  {% if task.deadline %}
+    {{ task.deadline|date:"d M Y" }}
+  {% else %}
+    <span style="color:#f59e0b;">No deadline</span>
+  {% endif %}
+</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4">No tasks available</td>
+    </tr>
+    {% endfor %}
+
+  </table>
+
+</div>
+
+{% endblock %}

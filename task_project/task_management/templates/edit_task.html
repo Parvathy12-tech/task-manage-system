@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+Edit Task
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+  .edit-wrapper{
+    padding:40px 0;
+    min-height:100vh;
+    background:#f1f5f9;
+  }
+
+  .edit-box{
+    max-width:760px;
+    margin:auto;
+    background:white;
+    padding:45px;
+    border-radius:24px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  }
+
+  .edit-title{
+    font-size:38px;
+    font-weight:700;
+    color:#0f172a;
+    text-align:center;
+    margin-bottom:35px;
+  }
+
+  .form-label{
+    font-weight:600;
+    color:#334155;
+    margin-bottom:10px;
+  }
+
+  .form-control,
+  .form-select{
+    width:100%;
+    height:54px;
+    border-radius:14px;
+    border:1px solid #cbd5e1;
+    padding:12px 15px;
+    font-size:15px;
+    transition:0.3s;
+  }
+
+  .form-control:focus,
+  .form-select:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,0.12);
+  }
+
+  textarea.form-control{
+    height:auto;
+    min-height:130px;
+    resize:none;
+  }
+
+  .btn-update{
+    width:100%;
+    height:56px;
+    border:none;
+    border-radius:14px;
+    background:#16a34a;
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    transition:0.3s;
+  }
+
+  .btn-update:hover{
+    background:#15803d;
+    transform:translateY(-2px);
+  }
+
+</style>
+
+<div class="edit-wrapper">
+
+  <div class="container">
+
+    <div class="edit-box">
+
+      <h2 class="edit-title">
+        Edit Task
+      </h2>
+
+      <form method="POST">
+
+        {% csrf_token %}
+
+        <!-- Task Title -->
+
+        <div class="mb-4">
+
+          <label class="form-label">
+            Task Title
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="title"
+            value="{{ task.title }}"
+            required
+          >
+
+        </div>
+
+        <!-- Description -->
+
+        <div class="mb-4">
+
+          <label class="form-label">
+            Description
+          </label>
+
+          <textarea
+            class="form-control"
+            rows="5"
+            name="description"
+            required
+          >{{ task.description }}</textarea>
+
+        </div>
+
+        <!-- Assigned User + Status -->
+
+        <div class="row">
+
+          <div class="col-md-6 mb-4">
+
+            <label class="form-label">
+              Assigned User
+            </label>
+
+            <select
+              class="form-select"
+              name="assigned_to"
+            >
+
+              <option value="">
+                Select User
+              </option>
+
+              {% for user in users %}
+
+              <option
+                value="{{ user.id }}"
+                {% if task.assigned_to.id == user.id %}
+                selected
+                {% endif %}
+              >
+                {{ user.get_full_name }}
+              </option>
+
+              {% endfor %}
+
+            </select>
+
+          </div>
+
+          <div class="col-md-6 mb-4">
+
+            <label class="form-label">
+              Status
+            </label>
+
+            <select
+              class="form-select"
+              name="status"
+              required
+            >
+
+              <option
+                value="Pending"
+                {% if task.status == "Pending" %}
+                selected
+                {% endif %}
+              >
+                Pending
+              </option>
+
+              <option
+                value="In Progress"
+                {% if task.status == "In Progress" %}
+                selected
+                {% endif %}
+              >
+                In Progress
+              </option>
+
+              <option
+                value="Completed"
+                {% if task.status == "Completed" %}
+                selected
+                {% endif %}
+              >
+                Completed
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+        <!-- Deadline + Project -->
+
+        <div class="row">
+
+          <div class="col-md-6 mb-4">
+
+            <label class="form-label">
+              Deadline
+            </label>
+
+            <input
+              type="date"
+              class="form-control"
+              name="deadline"
+              value="{{ task.deadline|date:'Y-m-d' }}"
+            >
+
+          </div>
+
+          <div class="col-md-6 mb-4">
+
+            <label class="form-label">
+              Project
+            </label>
+
+            <input
+              type="text"
+              class="form-control"
+              name="project"
+              value="{{ task.project }}"
+              required
+            >
+
+          </div>
+
+        </div>
+
+        <!-- Update Button -->
+
+        <button
+          type="submit"
+          class="btn-update"
+        >
+          Update Task
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}
