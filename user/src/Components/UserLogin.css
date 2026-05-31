@@ -59,7 +59,7 @@
   font-size:34px;
 }
 
-.user-login-page .user-login-container h1{
+.user-login-page .user-login-container h2{
   text-align:center;
 
   font-size:32px;
@@ -122,17 +122,15 @@
 
   background:rgba(255,255,255,0.18);
 }
-
-.user-login-page .user-login-btn{
+.modern-button{
   width:100%;
 
-  padding:15px;
+  padding:14px 20px;
 
   border:none;
+  border-radius:12px;
 
-  border-radius:14px;
-
-  background:linear-gradient(to right,#2563eb,#1d4ed8);
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
 
   color:white;
 
@@ -141,27 +139,26 @@
 
   cursor:pointer;
 
-  transition:0.3s;
+  transition:all 0.3s ease;
 
-  margin-top:10px;
-
-  box-shadow:0 6px 18px rgba(37,99,235,0.4);
+  box-shadow:0 8px 20px rgba(37,99,235,0.35);
 }
 
-.user-login-page .user-login-btn:hover{
+.modern-button:hover{
   transform:translateY(-2px);
 
-  background:linear-gradient(to right,#1d4ed8,#1e40af);
+  box-shadow:0 12px 25px rgba(37,99,235,0.45);
+
+  background:linear-gradient(135deg,#1d4ed8,#2563eb);
 }
 
-.user-login-page .user-login-divider{
-  margin-top:30px;
+.modern-button:active{
+  transform:translateY(0);
+}
 
-  text-align:center;
-
-  color:#cbd5e1;
-
-  font-size:14px;
+.modern-button:disabled{
+  opacity:0.7;
+  cursor:not-allowed;
 }
 
 @media(max-width:500px){

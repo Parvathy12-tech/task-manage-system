@@ -64,7 +64,7 @@ function UserLogin() {
 
       <div className="user-login-container">
 
-        <h2>User Login</h2>
+        <h2 >User Login</h2>
 
         <form onSubmit={handleLogin}>
 
@@ -91,9 +91,9 @@ function UserLogin() {
           </div>
 
           {/* BUTTON */}
-          <button type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
-          </button>
+          <button type="submit" className="modern-button" disabled={loading}>
+  {loading ? "Logging in..." : "Login"}
+</button>
 
         </form>
 
